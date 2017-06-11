@@ -15,12 +15,11 @@ function followed(event_data){
 
 function TweetIt(txt){
 	var data_to_put = { 'status': txt }
-
 	T.post('statuses/update', data_to_put, putData)
-
 	function putData(err, data, response){
 		if(err)
 			console.log(err)
 		else
 			console.log(data.text);
 	}
+}
