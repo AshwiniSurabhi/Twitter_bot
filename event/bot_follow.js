@@ -24,5 +24,3 @@ function TweetIt(txt){
 		else
 			console.log(data.text);
 	}
-
-}
