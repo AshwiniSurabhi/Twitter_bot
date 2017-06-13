@@ -1,0 +1,30 @@
+var Twit = require("twit");
+var config = require('./config');
+var T = new Twit(config);
+
+var stream = T.stream('user');
+stream.on('tweet', tweetEvent);
+
+function tweetEvent(event_data){
+	var me = event_data.in_reply_to_screen_name;
+	var text = event_data.text;
+	var from = event_data.screen_name;
+	TweetIt("Thank you "+from+" for tweeting me with "+ text + "___ "+ from);
+	
+	//console.log("Working");
+	//var fs = require('fs');
+	//var content = JSON.stringify(event_data,null,2);
+	//fs.writeFile("tweet.json",content);
+	
+}
+
+function TweetIt(txt){
+	var data_to_put = { 'status': txt }
+	T.post('statuses/update', data_to_put, putData)
+	function putData(err, data, response){
+		if(err)
+			console.log(err)
+		else
+			console.log(data.text);
+	}
+}
